@@ -1,39 +1,29 @@
-/* TYPING EFFECT */
+/* Typing Animation */
 
 const roles=[
-"AI Engineer",
-"Machine Learning Developer",
-"GenAI & RAG Builder",
-"Agentic AI Enthusiast"
+"Machine Learning Professional",
+"Generative AI Builder",
+"Agentic AI Developer",
+"RAG System Engineer"
 ];
 
-let i=0,j=0,deleting=false;
+let i=0,j=0,del=false;
 const typing=document.getElementById("typing");
 
 function type(){
 const word=roles[i];
-
 typing.textContent=word.substring(0,j);
 
-if(!deleting){ j++; } else { j--; }
+j+=del?-1:1;
 
-if(j===word.length){
-deleting=true;
-setTimeout(type,1200);
-return;
+if(j===word.length) del=true;
+if(j===0){del=false;i=(i+1)%roles.length;}
+
+setTimeout(type,del?40:80);
 }
-
-if(j===0){
-deleting=false;
-i=(i+1)%roles.length;
-}
-
-setTimeout(type,deleting?40:80);
-}
-
 type();
 
-/* CURSOR GLOW */
+/* Cursor Glow */
 
 const glow=document.querySelector(".cursor-glow");
 
@@ -42,7 +32,7 @@ glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
 });
 
-/* PARTICLES */
+/* Particles */
 
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
@@ -52,12 +42,12 @@ canvas.height=innerHeight;
 
 let particles=[];
 
-for(let k=0;k<120;k++){
+for(let k=0;k<90;k++){
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-vx:(Math.random()-0.5)*0.5,
-vy:(Math.random()-0.5)*0.5,
+vx:(Math.random()-0.5)*0.4,
+vy:(Math.random()-0.5)*0.4,
 size:Math.random()*2
 });
 }
